@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.2'
 # Use sqlite3 as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -30,10 +30,8 @@ gem 'default_where', github: 'qinmingyuan/default_where'
 gem 'spreadsheet'
 gem 'roo'
 
-gem 'exifr'
-gem 'sidekiq'
 # Login & Authority
-gem 'devise', git: 'https://github.com/plataformatec/devise.git'
+gem 'devise', '4.3.0'
 gem 'cancancan'
 
 # Use CoffeeScript for .coffee assets and views
@@ -56,8 +54,6 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem "better_errors"
-  gem "binding_of_caller"
 end
 
 group :development do
