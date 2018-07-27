@@ -1,15 +1,10 @@
-default: &default
-  adapter: mysql2
-  pool: 5
-  reconnect: true
-  username: root
-  password: 
-
 development:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
   database: primary_coding
-
-# 配置报表数据源
-from:
-  <<: *default
-  database: primary_coding
+  username: root
+  password: jamst@123
+  host: 127.0.0.1
+  
