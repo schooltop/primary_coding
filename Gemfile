@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.2'
 # Use sqlite3 as the database for Active Record
-gem 'mysql2', '~> 0.3.0'
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -31,7 +31,7 @@ gem 'spreadsheet'
 gem 'roo'
 
 # Login & Authority
-gem 'devise', '4.3.0'
+gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 gem 'cancancan'
 
 # Use CoffeeScript for .coffee assets and views
