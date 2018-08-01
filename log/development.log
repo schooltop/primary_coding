@@ -18460,3 +18460,114 @@ DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is depr
 DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
 DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/new_framework_defaults.rb:21)
 DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/new_framework_defaults.rb:21)
+DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK(270988398993983370, 0)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateCourses (20180727130127)
+  [1m[35m (16.5ms)[0m  [1m[35mCREATE TABLE `courses` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `course_type_id` bigint, `name` varchar(255), `comment` text, `status` int DEFAULT 0 COMMENT '0默认，1关闭', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_courses_on_course_type_id`  (`course_type_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727130127')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEmployeeCourses (20180727130251)
+  [1m[35m (14.4ms)[0m  [1m[35mCREATE TABLE `employee_courses` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `employee_id` bigint, `course_id` bigint, `status` int DEFAULT 0 COMMENT '0默认，1关闭', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_employee_courses_on_employee_id`  (`employee_id`),  INDEX `index_employee_courses_on_course_id`  (`course_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727130251')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEmployeeCourseDetails (20180727130843)
+  [1m[35m (12.8ms)[0m  [1m[35mCREATE TABLE `employee_course_details` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `employee_id` bigint, `employee_course_id` bigint, `course_type_id` bigint, `status` int DEFAULT 0 COMMENT '0练习，1作业', `comment` text COMMENT '编程内容', `page_url` varchar(255) COMMENT '文件url', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_employee_course_details_on_employee_id`  (`employee_id`),  INDEX `index_employee_course_details_on_employee_course_id`  (`employee_course_id`),  INDEX `index_employee_course_details_on_course_type_id`  (`course_type_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727130843')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourseTypes (20180727131003)
+  [1m[35m (11.7ms)[0m  [1m[35mCREATE TABLE `course_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727131003')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEmployeeCourseLogs (20180727132536)
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE TABLE `employee_course_logs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `employee_id` bigint, `employee_course_id` bigint, `employee_course_detail_id` bigint, `course_type_id` bigint, `comment` text COMMENT '编程内容', `message` text COMMENT '执行结果', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_employee_course_logs_on_employee_id`  (`employee_id`),  INDEX `index_employee_course_logs_on_employee_course_id`  (`employee_course_id`),  INDEX `index_employee_course_logs_on_employee_course_detail_id`  (`employee_course_detail_id`),  INDEX `index_employee_course_logs_on_course_type_id`  (`course_type_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727132536')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2018-08-01 20:15:24', '2018-08-01 20:15:24')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK(270988398993983370)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `course_types`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'course_types'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `courses`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'courses'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `employee_course_details`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employee_course_details'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_course_logs`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employee_course_logs'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_courses`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employees`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employees'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employees_roles`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `roles`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'roles'[0m
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/new_framework_defaults.rb:21)
+DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `courses` (`name`, `comment`, `created_at`, `updated_at`) VALUES ('test', 'p \'hellow word\' ', '2018-08-01 20:21:52', '2018-08-01 20:21:52')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  `courses`.* FROM `courses` ORDER BY `courses`.`id` DESC LIMIT 1[0m
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/new_framework_defaults.rb:21)
+DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK(270988398993983370, 0)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateEmployeeCourseDetails (20180727130843)
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE `employee_course_details`[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20180727130843'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK(270988398993983370)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `course_types`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'course_types'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `courses`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'courses'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_course_logs`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employee_course_logs'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_courses`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employees`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employees'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employees_roles`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `roles`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'roles'[0m
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/new_framework_defaults.rb:21)
+DEPRECATION WARNING: [SIMPLE_FORM] SimpleForm.form_class= is deprecated and will be removed in 4.x. Use SimpleForm.default_form_class= instead (called from block in <top (required)> at /Users/lijiangfeng/work/primary_coding/config/initializers/simple_form_semantic.rb:64)
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK(270988398993983370, 0)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateEmployeeCourseDetails (20180727130843)
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE `employee_course_details` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `employee_id` bigint, `employee_course_id` bigint, `course_type_id` bigint DEFAULT 0 COMMENT '0ruby,1python,2js', `status` int DEFAULT 0 COMMENT '0练习，1作业', `comment` text COMMENT '编程内容', `page_url` varchar(255) COMMENT '文件url', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_employee_course_details_on_employee_id`  (`employee_id`),  INDEX `index_employee_course_details_on_employee_course_id`  (`employee_course_id`),  INDEX `index_employee_course_details_on_course_type_id`  (`course_type_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180727130843')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK(270988398993983370)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `course_types`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'course_types'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `courses`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'courses'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_course_details`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employee_course_details'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `employee_course_logs`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employee_course_logs'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `employee_courses`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `employees`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'employees'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `employees_roles`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `roles`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'roles'[0m
