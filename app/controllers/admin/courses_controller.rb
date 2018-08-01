@@ -1,5 +1,7 @@
 class Admin::CoursesController < Admin::BaseController
 
+  before_action :set_course, only: [:show, :edit, :update, :destroy]
+
   def index
     @q = SearchParams.new(params[:search_params] || {})
     @courses = Course.default_where(@q.attributes(self)).page(params[:page]).per(10)
@@ -13,19 +15,15 @@ class Admin::CoursesController < Admin::BaseController
 
   def edit
     @html_title = "Edit Course"
-    @course =  Course.find(params[:id])
     render :layout => false
   end
 
   def show
     @html_title =  "Show Course"
-    @course =  Course.find(params[:id])
     render :layout => false
   end
 
   def update
-    @course = Course.find(params[:id])
-
     respond_to do |format|
       if @course.update_attributes(permitted_resource_params)
         format.json { render :json=>{:success=>true} }
