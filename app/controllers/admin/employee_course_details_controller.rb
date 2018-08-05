@@ -1,10 +1,10 @@
 class Admin::EmployeeCourseDetailsController < Admin::BaseController
 
-  before_action :set_employee_course_detail, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee_course_detail, only: [:show, :edit, :update, :destroy, :show_detail]
 
   def index
     @q = SearchParams.new(params[:search_params] || {})
-    @employee_course_details = EmployeeCourseDetail.default_where(@q.attributes(self)).page(params[:page]).per(10)
+    @employee_courses = EmployeeCourse.where(employee_id:params[:employee_id]).default_where(@q.attributes(self)).page(params[:page]).per(10)
   end
 
   def new
@@ -18,9 +18,20 @@ class Admin::EmployeeCourseDetailsController < Admin::BaseController
     render :layout => false
   end
 
+  def history_details
+    @employee_course_details = EmployeeCourseDetail.where(employee_course_id:params[:employee_course_id]).default_where(@q.attributes(self)).page(params[:page]).per(10)
+  end
+
   def show
+    @employee_course = @employee_course_detail.employee_course
+    @employee = @employee_course&.employee
+    @course = @employee_course&.course
     @html_title =  "Show EmployeeCourseDetail"
     render :layout => false
+  end
+
+  def show_detail
+    @result = @employee_course_detail.send("#{@employee_course_detail.course_type.name}_run_comment") 
   end
 
   def update
