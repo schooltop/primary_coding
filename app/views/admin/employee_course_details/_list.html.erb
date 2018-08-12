@@ -1,0 +1,25 @@
+<tr id="employee_course_<%= employee_course.id %>">
+
+  <td class="center aligned">
+    <%= employee_course.&employee&.name %>
+  </td>
+
+  <td class="center aligned">
+    <%= employee_course.&course&.name %>
+  </td>
+
+  <td class="center aligned">
+    <%= employee_course.&course&.course_type&.name %>
+  </td>
+  <td class="center aligned">
+    <%= employee_course.created_at %>
+  </td>
+
+  <td class="center aligned">
+    <%= link_to history_details_admin_employee_course_details_path(), 'data-content' => "练习记录", 'data-variation' => 'inverted', class: "ui icon blue basic button" do %>
+      <i class="edit icon"></i>
+    <% end %>
+    <%= link_to '新增练习', new_admin_employee_cource_detail_path(), class: 'ui primary button' %>
+  </td>
+
+</tr>

@@ -5,22 +5,26 @@
 </div>
 
 <div class="ui blue segment">
+  <div class="ui grid">
+    <div class="left floated wide column">
+      <%= link_to '新增练习', new_admin_employee_cource_detail_path(employee_course_id:params[:employee_course_id]), class: 'ui primary button' %>
+    </div>
+  </div>
   <table class="ui selectable striped celled table">
     <thead>
     <tr>
-      <th class="center aligned">学生信息</th>
       <th class="center aligned">课程名称</th>
       <th class="center aligned">课程类型</th>
-      <th class="center aligned">学习时间</th>
+      <th class="center aligned">练习时间</th>
       <th class="center aligned">操作</th>
     </tr>
     </thead>
     <tbody>
-    <%= render :partial => "list", :collection => @employee_courses, :as => :employee_course %>
+    <%= render :partial => "history_list", :collection => @employee_course_details, :as => :employee_course_detail %>
     </tbody>
   </table>
   <span class="blue">
-      <%= page_entries_info(@employee_courses) %>
+      <%= page_entries_info(@employee_course_details) %>
     </span>
-  <%= paginate(@employee_courses, :theme => 'admin') %>
+  <%= paginate(@employee_course_details, :theme => 'admin') %>
 </div>
