@@ -1,0 +1,20 @@
+<tr id="employee_course_detail_<%= employee_course_detail.id %>">
+
+  <td class="center aligned">
+    <%= employee_course_detail.&course&.name %>
+  </td>
+
+  <td class="center aligned">
+    <%= employee_course_detail&.course_type&.name %>
+  </td>
+  <td class="center aligned">
+    <%= employee_course_detail.created_at %>
+  </td>
+
+  <td class="center aligned">
+    <%= link_to admin_employee_course_detail_path(id:employee_course_detail), 'data-content' => "查看练习", 'data-variation' => 'inverted', class: "ui icon blue basic button" do %>
+      <i class="edit icon"></i>
+    <% end %>
+  </td>
+
+</tr>

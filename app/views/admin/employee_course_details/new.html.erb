@@ -1,0 +1,21 @@
+<div>
+  <div style="width: 30%;">
+    <%= @course.name %>
+    <%= @course.comment%>
+  </div>
+  <div style="width: 30%;">
+  <%= simple_form_for @activity, url: show_detail_admin_employee_course_details_path, method: :post, remote: true do |f| %>
+
+    <textarea name="comment" id="comment"  class="text optional" placeholder="请输代码">
+    </textarea>
+    
+    <%= f.submit '运行', class: 'ui primary button' %>
+    <%= f.submit '保存', class: 'ui primary button' %>
+  <% end %>
+    </div>
+  <div style="width: 40%;" id="show_log">
+    <textarea name="message" id="message"  class="text optional" placeholder="执行结果">   
+    </textarea>
+  </div>
+  
+</div>

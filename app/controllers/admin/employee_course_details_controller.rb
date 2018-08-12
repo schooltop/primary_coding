@@ -9,7 +9,10 @@ class Admin::EmployeeCourseDetailsController < Admin::BaseController
 
   def new
     @html_title =  "New EmployeeCourseDetail"
-    @employee_course_detail =  EmployeeCourseDetail.new
+    @employee_course = EmployeeCourse.find_by(employee_course_id:params[:employee_course_id])
+    @employee = @employee_course&.employee
+    @course = @employee_course&.course 
+    @employee_course_detail =  EmployeeCourseDetail.create(employee_course_id:params[:employee_course_id],employee:@employee.id,course_type:@course.course_type)
     render :layout => false
   end
 
@@ -19,6 +22,7 @@ class Admin::EmployeeCourseDetailsController < Admin::BaseController
   end
 
   def history_details
+    @employee_course = EmployeeCourse.find_by(employee_course_id:params[:employee_course_id])
     @employee_course_details = EmployeeCourseDetail.where(employee_course_id:params[:employee_course_id]).default_where(@q.attributes(self)).page(params[:page]).per(10)
   end
 
@@ -31,6 +35,7 @@ class Admin::EmployeeCourseDetailsController < Admin::BaseController
   end
 
   def show_detail
+    @employee_course_detail.update(comment:params[:comment])
     @result = @employee_course_detail.send("#{@employee_course_detail.course_type.name}_run_comment") 
   end
 
